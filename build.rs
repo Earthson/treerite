@@ -10,6 +10,8 @@ fn build_lib() {
         .define("BUILD_STATIC_LIBS", "ON")
         .build();
     println!("cargo:rustc-link-search={}/lib", dst.display());
+    // manylinux2014, centos7. generate lib64 instead of lib
+    println!("cargo:rustc-link-search={}/lib64", dst.display());
     println!("cargo:rustc-link-lib=static=treelite_runtime_static");
     #[cfg(target_os = "linux")]
     {
